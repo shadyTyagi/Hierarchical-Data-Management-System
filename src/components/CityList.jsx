@@ -1,0 +1,30 @@
+import React from "react";
+
+function CityList({ countryId, stateId, cities, deleteCity }) {
+  return (
+    <div className="city-list">
+      <h4>Cities</h4>
+      {cities.length === 0 ? (
+        <p>No cities added yet.</p>
+      ) : (
+        <ul>
+          {cities.map((city) => (
+            <li key={city.id} className="city-item">
+              <span className="city-name">{city.name}</span>
+              <div className="actions">
+                <button
+                  className="delete-btn"
+                  onClick={() => deleteCity(countryId, stateId, city.id)}
+                >
+                  Delete
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+export default CityList;

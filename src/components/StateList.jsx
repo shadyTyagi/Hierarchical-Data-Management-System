@@ -7,6 +7,7 @@ function StateList({
   editState,
   deleteState,
   addCity,
+  editCity,
   deleteCity,
 }) {
   const [expandedState, setExpandedState] = useState(null);
@@ -65,6 +66,7 @@ function StateList({
                   countryId={countryId}
                   stateId={state.id}
                   cities={state.cities}
+                  editCity={editCity}
                   deleteCity={deleteCity}
                 />
               )}

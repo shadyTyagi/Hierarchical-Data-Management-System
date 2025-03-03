@@ -164,6 +164,44 @@ function App() {
     }
   };
 
+  // Edit a city
+  const editCity = (countryId, stateId, cityId) => {
+    const country = countries.find((c) => c.id === countryId);
+    if (!country) return;
+
+    const state = country.states.find((s) => s.id === stateId);
+    if (!state) return;
+
+    const city = state.cities.find((c) => c.id === cityId);
+    if (!city) return;
+
+    const newName = prompt(`Edit city name:`, city.name);
+    if (newName && newName.trim() && newName !== city.name) {
+      if (
+        window.confirm(
+          `Are you sure you want to update ${city.name} to ${newName}?`
+        )
+      ) {
+        const updatedCountries = countries.map((c) => {
+          if (c.id === countryId) {
+            const updatedStates = c.states.map((s) => {
+              if (s.id === stateId) {
+                const updatedCities = s.cities.map((c) =>
+                  c.id === cityId ? { ...c, name: newName.trim() } : c
+                );
+                return { ...s, cities: updatedCities };
+              }
+              return s;
+            });
+            return { ...c, states: updatedStates };
+          }
+          return c;
+        });
+        setCountries(updatedCountries);
+      }
+    }
+  };
+
   // Delete a city
   const deleteCity = (countryId, stateId, cityId) => {
     const country = countries.find((c) => c.id === countryId);
@@ -206,6 +244,7 @@ function App() {
           editState={editState}
           deleteState={deleteState}
           addCity={addCity}
+          editCity={editCity}
           deleteCity={deleteCity}
         />
       </div>

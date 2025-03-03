@@ -3,7 +3,6 @@ import CountryList from "./components/CountryList";
 import "./App.css";
 
 function App() {
-  // Initialize state from localStorage or empty array
   const [countries, setCountries] = useState(() => {
     const savedData = localStorage.getItem("countries");
     return savedData ? JSON.parse(savedData) : [];
@@ -19,7 +18,7 @@ function App() {
     const countryName = prompt("Enter country name:");
     if (countryName && countryName.trim()) {
       const newCountry = {
-        id: Date.now(), // Simple unique ID
+        id: Date.now(),
         name: countryName.trim(),
         states: [],
       };
